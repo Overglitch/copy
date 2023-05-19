@@ -12,26 +12,54 @@ class RiemannSum:
         self.exponents = self.get_exponents(self.terms)
 
     @staticmethod
-    def get_terms(polynomial_expression):
-        terms = []
-        pattern = r'(-?\d+(?:\.\d+)?)\*?x\^(-?\d+)'
-        matches = re.findall(pattern, polynomial_expression)
-
-        for match in matches:
-            coefficient = float(match[0])
-            exponent = int(match[1])
-            terms.append((coefficient, exponent))
-
-        return terms
+    def get_terms(polynomial):
+        term_regex = r"(?<!\^)(?=[+-](?!-))"
+        terms = re.split(term_regex, polynomial)
+        
+        for i in range(len(terms)):
+            terms[i] = terms[i].strip()
+            
+            if terms[i].endswith("^"):
+                terms[i] += terms[i + 1]
+                terms[i + 1] = ""
+        
+        return list(filter(lambda term: term != "", terms))
 
     @staticmethod
     def get_coefficients(terms):
-        coefficients = [term[0] for term in terms]
+        coefficients = [None] * len(terms)
+        coefficient_pattern = r"([-+]?\d+)"
+        
+        for i in range(len(terms)):
+            term = terms[i]
+            coefficient_matcher = re.search(coefficient_pattern, term)
+            
+            if coefficient_matcher:
+                coefficient = coefficient_matcher.group(1)
+                
+                if "x" in term:
+                    coefficient = coefficient or ("-1" if term.startswith("-") else "1")
+                
+                coefficients[i] = float(coefficient)
+            else:
+                coefficients[i] = 0.0
+        
         return coefficients
 
     @staticmethod
     def get_exponents(terms):
-        exponents = [term[1] for term in terms]
+        exponents = [None] * len(terms)
+        exponent_pattern = r"x\^([-+]?\d+)"
+        
+        for i in range(len(terms)):
+            term = terms[i]
+            exponent_matcher = re.search(exponent_pattern, term)
+            
+            if exponent_matcher:
+                exponents[i] = int(exponent_matcher.group(1))
+            else:
+                exponents[i] = 0
+        
         return exponents
 
 
@@ -50,10 +78,9 @@ class RiemannSumThread(threading.Thread):
     def run(self):
         sum_result = self.calculate_sum()
         self.sums[self.thread_index] = sum_result
-        print(f"Hilo ({self.thread_index + 1}) | a={self.a:.4f} - b={self.b:.4f} - n={self.num_intervals} - area={sum_result}")
 
     def calculate_sum(self):
-        delta_x = (self.b - self.a) / self.num_intervals
+        delta_x = float(self.b - self.a) / self.num_intervals
         sum_result = 0.0
 
         for i in range(self.num_intervals):
