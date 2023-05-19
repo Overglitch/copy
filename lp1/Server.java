@@ -1,5 +1,3 @@
-package sockets.caso3.lp1;
-
 import java.util.Scanner;
 
 public class Server {

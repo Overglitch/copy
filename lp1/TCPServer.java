@@ -1,5 +1,3 @@
-package sockets.caso3.lp1;
-
 import java.net.ServerSocket;
 import java.net.Socket;
 
