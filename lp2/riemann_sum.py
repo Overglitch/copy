@@ -81,10 +81,10 @@ class RiemannSumThread(threading.Thread):
         print(f"Hilo ({self.thread_index + 1}) | a={self.a:.4f} - b={self.b:.4f} - n={self.num_intervals} - area={sum_result}")
 
     def calculate_sum(self):
-        delta_x = (self.b - self.a) / self.num_intervals
+        delta_x = float(self.b - self.a) / self.num_intervals
         sum_result = 0.0
 
-        for i in range(self.num_intervals):
+        for i in range(int(self.num_intervals)):
             x = self.a + (i + 0.5) * delta_x
             term_sum = 0.0
 

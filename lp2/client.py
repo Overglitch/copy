@@ -35,7 +35,7 @@ class Client:
     def process(self, polynomial, a, b, n):
         riemann_sum = RiemannSum(a, b, n, polynomial)
         num_threads = 6
-        n_i = n / num_threads
+        n_i = int(n / num_threads)
         delta_x_i = (b - a) / num_threads
         threads = []
 
