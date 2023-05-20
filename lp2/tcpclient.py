@@ -2,7 +2,7 @@ import socket
 
 
 class TcpClient:
-    SERVER_PORT = 7777
+    SERVER_PORT = 4444
 
     def __init__(self, ip_address, message_listener):
         self.server_ip = ip_address

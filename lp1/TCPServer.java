@@ -4,7 +4,7 @@ import java.net.Socket;
 public class TCPServer {
 
     protected int clientCount = 0;
-    public static final int SERVER_PORT = 7777;
+    public static final int SERVER_PORT = 4444;
     private final OnMessageReceived messageListener;
     private final TCPServerThread[] connectedClients = new TCPServerThread[10];
     public TCPServer(OnMessageReceived messageListener) {

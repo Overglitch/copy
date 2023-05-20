@@ -40,13 +40,13 @@ public class Server {
                 double data = Double.parseDouble(parts[1]);
                 if (data > 0) {
                     clientResponses[clientCount] = data;
-                    System.out.println("Cliente [" + clientCount + "] = " + clientResponses[clientCount]);
+                    System.out.println("Cliente " + (clientCount + 1) + " = " + clientResponses[clientCount]);
                     System.out.println("Numero de clientes: " + this.tcpServer.clientCount);
                     clientCount++;
 
                     if (clientCount == this.tcpServer.clientCount) {
                         for (int i = 0; i < clientCount; i++) {
-                            System.out.println("Cliente [" + i + "] = " + clientResponses[i]);
+                            System.out.println("Resultado del cliente " + (i+1) + " = " + clientResponses[i]);
                             totalSum += clientResponses[i];
                         }
                         System.out.println("\nArea total = " + totalSum);

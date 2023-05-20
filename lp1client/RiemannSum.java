@@ -1,5 +1,3 @@
-package sockets.caso1.lp2;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

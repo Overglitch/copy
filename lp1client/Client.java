@@ -1,5 +1,3 @@
-package sockets.caso1.lp2;
-
 class Client {
 
     private final double[] sums = new double[40];

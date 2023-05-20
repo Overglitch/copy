@@ -8,7 +8,7 @@ class Client {
     }
 
     start() {
-        this.tcpClient = new TCPClient('192.168.1.14', this.receiveFromClient.bind(this));
+        this.tcpClient = new TCPClient('127.0.0.1', this.receiveFromClient.bind(this));
         this.tcpClient.run();
     }
 
