@@ -11,7 +11,7 @@ class Client {
     void start() {
         new Thread(
                 () -> {
-                    tcpClient = new TCPClient("127.0.0.1", this::receiveFromClient);
+                    tcpClient = new TCPClient("192.168.1.14", this::receiveFromClient);
                     tcpClient.run();
                 }
         ).start();

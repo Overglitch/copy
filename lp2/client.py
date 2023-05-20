@@ -13,7 +13,7 @@ class Client:
         client.start()
 
     def start(self):
-        self.tcp_client = TcpClient("127.0.0.1", self.receive_from_client)
+        self.tcp_client = TcpClient("192.168.1.14", self.receive_from_client)
         self.tcp_client.run()
 
     def receive_from_client(self, input_client):
